@@ -7,11 +7,9 @@ export default function Cart(props) {
         .map(e => e.price)
         .reduce((acc, price) => acc + price);
       return (
-        <div>
-          <div class="sub">
-            <div class="subtotal">SUBTOTAL</div>
-            <p class="sub-price-val">{total}</p>
-          </div>
+        <div class="sub">
+          <div class="subtotal">SUBTOTAL</div>
+          <p class="sub-price-val">{`$ ${String(total).slice(0, 6)}`}</p>
         </div>
       );
     }
@@ -23,6 +21,14 @@ export default function Cart(props) {
         X
       </div>
       <div className="float-cart-content">
+        <div className="float-cart-header">
+          <img
+            className="float-cart-header-img"
+            src="shopping-bag2.png"
+            alt=""
+          />
+          <p className="float-cart-value">{props.cart.length}</p>
+        </div>
         <div class="float-cart-shelf-container">
           {props.cart.map(item => (
             <>
@@ -43,12 +49,16 @@ export default function Cart(props) {
               </div>
             </>
           ))}
-          <div class="float-cart-footer">
-            <Total cart={props.cart} />
-            <div className="buy-btn" onClick={props.checkout}>
-              CHECKOUT
+          {props.cart.length ? (
+            <div class="float-cart-footer">
+              <Total cart={props.cart} />
+              <div className="buy-btn" onClick={props.checkout}>
+                CHECKOUT
+              </div>
             </div>
-          </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

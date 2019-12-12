@@ -5,6 +5,7 @@ import data from "./data.json";
 import Products from "./components/Products";
 import Filters from "./components/Filters";
 import Cart from "./components/Cart";
+import Corner from "./components/Corner";
 
 class App extends React.Component {
   constructor(props) {
@@ -40,12 +41,12 @@ class App extends React.Component {
       return item.availableSizes.some(itemSize => itemSize === size);
     });
     this.setState({
-      filterData: this.state.filterData.concat(a),
+      filterData: a,
       active: "filter"
     });
   };
   handleSort = () => {
-    return data.products.sort(function(val1, val2) {
+    return data.products.sort((val1, val2) => {
       return val2.price - val1.price;
     });
   };
@@ -108,6 +109,7 @@ class App extends React.Component {
   render() {
     return (
       <>
+        <Corner />
         <main>
           <Filters handleFilters={this.handleFilters} />
           {this.handleView()}

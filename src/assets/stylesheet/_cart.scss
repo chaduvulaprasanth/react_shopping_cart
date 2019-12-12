@@ -1,7 +1,7 @@
 .float-cart-open {
-  padding-top: 8rem;
   right: 0;
   height: 100%;
+  width: 450px;
   z-index: 5;
 }
 .float-cart-close-btn {
@@ -19,6 +19,22 @@
 .float-cart-content {
   height: 100%;
   overflow-y: scroll;
+}
+.float-cart-header {
+  color: #ececec;
+  box-sizing: border-box;
+  padding: 45px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.float-cart-header-img {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 15px;
 }
 .float-cart-shelf-container {
   position: relative;
@@ -54,11 +70,11 @@ img {
   color: #eabf00;
 }
 .float-cart-footer {
-  box-sizing: border-box;
-  padding: 10%;
+  padding: 5% 0;
   position: fixed;
   bottom: 0;
-  height: 200px;
+  width: 411.7px;
+  bottom: 0;
   z-index: 2;
   background-color: #1b1a20;
 }
