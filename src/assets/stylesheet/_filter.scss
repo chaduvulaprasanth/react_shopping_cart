@@ -1,0 +1,30 @@
+.filters {
+  width: 15%;
+  margin-right: 15px;
+}
+h4 {
+  font-weight: bold;
+}
+input {
+  outline: none;
+}
+.filter-sizes {
+  width: 35px;
+  height: 35px;
+  font-size: 0.8rem;
+  border-radius: 50%;
+  border: none;
+  color: #1b1a20;
+  background-color: #ececec;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    border: 1px solid black;
+  }
+  &:focus {
+    background-color: black;
+    color: white;
+  }
+}
