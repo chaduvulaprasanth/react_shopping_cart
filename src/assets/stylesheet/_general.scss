@@ -13,8 +13,9 @@ main {
   position: fixed;
   top: 0;
   right: 0;
-  background-color: black;
+  background-color: #1b1a20;
   z-index: 2;
+  cursor: pointer;
 }
 .float-cart-value {
   position: absolute;

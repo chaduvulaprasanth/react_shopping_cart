@@ -29,16 +29,16 @@ export default function CartCard(props) {
                 </p>
                 <div className="counter">
                   <p
-                    className="counterinc"
-                    onClick={() => props.handleCartInc(item)}
-                  >
-                    +
-                  </p>
-                  <p
                     className="counterdec"
                     onClick={() => props.handleCartDec(item)}
                   >
                     -
+                  </p>
+                  <p
+                    className="counterinc"
+                    onClick={() => props.handleCartInc(item)}
+                  >
+                    +
                   </p>
                 </div>
               </div>

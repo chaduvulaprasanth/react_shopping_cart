@@ -22,10 +22,7 @@ export default class App extends React.Component {
       isOpen: false
     };
   }
-  handleSortBy = event => {
-    this.setState({ sortby: event.target.value });
-    this.handleSortView();
-  };
+
   handleProductsView = () => {
     this.setState({
       active: "products",
@@ -95,19 +92,24 @@ export default class App extends React.Component {
       active: "filter"
     });
   };
+
+  changeOpen = () => {
+    this.setState(state => ({ isOpen: !state.isOpen }));
+  };
+
+  handleSortBy = event => {
+    this.setState({ sortby: event.target.value });
+    this.handleSortView();
+  };
   handleSort = () => {
     return data.products.sort((val1, val2) => {
       return val2.price - val1.price;
     });
   };
-  changeOpen = () => {
-    this.setState(state => ({ isOpen: !state.isOpen }));
-  };
-
   handleSortView = () => {
     switch (this.state.sortby) {
       case "default":
-        this.handleProductsView();
+        this.setState({ active: "products" });
         break;
 
       case "lowestprice":
@@ -118,6 +120,7 @@ export default class App extends React.Component {
         this.setState({ products: this.handleSort().reverse() });
         break;
       default:
+        this.setState({ active: "products" });
         break;
     }
   };
@@ -138,6 +141,7 @@ export default class App extends React.Component {
           <>
             <Products
               products={this.state.filterData}
+              handleSortBy={this.handleSortBy}
               handleAddToCart={this.handleAddToCart}
             />
           </>

@@ -4,7 +4,7 @@ export default function TotalCartQuantity(props) {
   if (props.cart.length < 1) {
     return (
       <div>
-        <div className="float-cart">
+        <div onClick={props.handleClick} className="float-cart">
           <img src="/static/bag-icon.png" alt="" />
           <span className="float-cart-value">0</span>
         </div>
@@ -16,7 +16,7 @@ export default function TotalCartQuantity(props) {
       .reduce((acc, quantity) => acc + quantity);
   }
   return (
-    <div className="float-cart">
+    <div onClick={props.handleClick} className="float-cart">
       <img src="/static/bag-icon.png" alt="" />
       <span className="float-cart-value">{totalCartQuantity}</span>
     </div>
