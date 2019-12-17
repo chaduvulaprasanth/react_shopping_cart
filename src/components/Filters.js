@@ -6,12 +6,14 @@ export default function Filters(props) {
       <h4>Sizes:</h4>
       <div className="filter-sizes-div">
         {["XS", "S", "M", "ML", "L", "XL", "XXL"].map(size => (
-          <input
+          <button
             onClick={() => props.handleFilters(size)}
             className="filter-sizes"
             text=""
             value={size}
-          />
+          >
+            {size}
+          </button>
         ))}
       </div>
     </div>
