@@ -25,7 +25,7 @@ export default function CartCard(props) {
               <div>
                 <p className="cart-product-price">
                   {item.currencyFormat}
-                  {item.price * item.quantity}
+                  {(item.price * item.quantity).toFixed(2)}
                 </p>
                 <div className="counter">
                   <p

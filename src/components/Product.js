@@ -26,7 +26,7 @@ export default function Product(props) {
           </div>
           <p className="product-price-installments">
             or {product.installments}X
-            {String(product.price / product.installments).slice(0, 4)}
+            {(product.price / product.installments).toFixed(2)}
           </p>
           <div className="buy-btn">Add to cart</div>
         </div>

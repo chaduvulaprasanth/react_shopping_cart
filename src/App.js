@@ -14,7 +14,6 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       cart: [],
-      active: "products",
       products: data.products,
       filterData: [],
       sortby: "default",
@@ -23,12 +22,7 @@ export default class App extends React.Component {
     };
   }
 
-  handleProductsView = () => {
-    this.setState({
-      active: "products",
-      isOpen: false
-    });
-  };
+  // add to cart
   handleAddToCart = item => {
     const a = this.state.cart.find(product => product.id == item.id);
     if (a) {
@@ -46,6 +40,13 @@ export default class App extends React.Component {
       });
     }
   };
+
+  // to view the cart
+  changeOpen = () => {
+    this.setState(state => ({ isOpen: !state.isOpen }));
+  };
+
+  // increment cart
   handleCartInc = item => {
     const inc = this.state.cart.find(product => product.id == item.id);
     if (inc) {
@@ -59,6 +60,8 @@ export default class App extends React.Component {
       });
     }
   };
+
+  // decrement cart
   handleCartDec = item => {
     const inc = this.state.cart.find(product => product.id == item.id);
     if (inc) {
@@ -74,35 +77,49 @@ export default class App extends React.Component {
       });
     }
   };
+
+  // remove item from cart
   handleRemove = item => {
     this.setState({
       cart: this.state.cart.filter(product => product.id !== item.id)
     });
   };
 
+  // checkout message
   checkout = () => {
     alert("ordered successfully");
   };
+
+  // handle filter sizes
   handleFilters = size => {
-    var a = this.state.products.filter(item => {
-      return item.availableSizes.some(itemSize => itemSize === size);
-    });
-    this.setState({
-      filterData: a,
-      active: "filter"
+    console.log(size);
+    if (!this.state.filterData.includes(size)) {
+      this.setState({ filterData: [...this.state.filterData, size] });
+    } else {
+      this.setState({
+        filterData: this.state.filterData.filter(itemsize => itemsize !== size)
+      });
+    }
+  };
+
+  filteredData = () => {
+    let data = this.state.products;
+    return data.map(item => {
+      return item.availableSizes.filter(size =>
+        this.state.filterData.includes(size)
+      ).length
+        ? item
+        : {};
     });
   };
 
-  changeOpen = () => {
-    this.setState(state => ({ isOpen: !state.isOpen }));
-  };
-
+  // handle sort
   handleSortBy = event => {
     this.setState({ sortby: event.target.value });
     this.handleSortView();
   };
   handleSort = () => {
-    return data.products.sort((val1, val2) => {
+    return [...this.state.products].sort((val1, val2) => {
       return val2.price - val1.price;
     });
   };
@@ -120,43 +137,25 @@ export default class App extends React.Component {
         this.setState({ products: this.handleSort().reverse() });
         break;
       default:
-        this.setState({ active: "products" });
-        break;
-    }
-  };
-
-  handleView = () => {
-    switch (this.state.active) {
-      case "products":
-        return (
-          <Products
-            handleSortBy={this.handleSortBy}
-            products={this.state.products}
-            handleAddToCart={this.handleAddToCart}
-          />
-        );
-        break;
-      case "filter":
-        return (
-          <>
-            <Products
-              products={this.state.filterData}
-              handleSortBy={this.handleSortBy}
-              handleAddToCart={this.handleAddToCart}
-            />
-          </>
-        );
+        this.setState({ products: "products" });
         break;
     }
   };
 
   render() {
+    let dataToRender = this.state.filterData.length
+      ? this.filteredData().filter(item => Object.entries(item).length !== 0)
+      : this.state.products;
     return (
       <>
         <Corner />
         <main>
           <Filters handleFilters={this.handleFilters} />
-          {this.handleView()}
+          <Products
+            products={dataToRender}
+            handleSortBy={this.handleSortBy}
+            handleAddToCart={this.handleAddToCart}
+          />
         </main>
 
         <TotalCartQuantity
@@ -167,7 +166,7 @@ export default class App extends React.Component {
           <Cart
             cart={this.state.cart}
             checkout={this.checkout}
-            handleProductsView={this.handleProductsView}
+            handleClick={this.changeOpen}
             handleCartInc={this.handleCartInc}
             handleCartDec={this.handleCartDec}
             handleRemove={this.handleRemove}

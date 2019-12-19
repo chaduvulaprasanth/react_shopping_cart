@@ -7,7 +7,7 @@ import TotalCartQuantity from "./TotalCartQuantity";
 export default function Cart(props) {
   return (
     <div className="float-cart float-cart-open">
-      <div onClick={props.handleProductsView} class="float-cart-close-btn">
+      <div onClick={props.handleClick} class="float-cart-close-btn">
         X
       </div>
 

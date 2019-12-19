@@ -8,7 +8,7 @@ export default function Total(props) {
     return (
       <div class="sub">
         <div class="subtotal">SUBTOTAL</div>
-        <p class="sub-price-val">{`$ ${String(total).slice(0, 6)}`}</p>
+        <p class="sub-price-val">{`$ ${total.toFixed(2)}`}</p>
       </div>
     );
   }
